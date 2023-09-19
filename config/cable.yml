@@ -1,0 +1,11 @@
+development:
+  adapter: redis
+  url: redis://localhost:6379/1
+
+test:
+  adapter: test
+
+production:
+  adapter: redis
+  url: <%= ENV.fetch('REDISCLOUD_URL', nil) || ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  channel_prefix: tetris_production

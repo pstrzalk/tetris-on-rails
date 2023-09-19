@@ -1,0 +1,147 @@
+<% presenter = GamePresenter.new(game) %>
+
+<div class="game" id="<%= dom_id(game) %>">
+  <table class="table">
+    <tr>
+      <td class="game-col">
+        <div class="line">
+          <div class="cell">
+            <img src="/images/wall_icon.png" class="icon" />
+          </div>
+          <% Game::BOARD_WIDTH.times do %>
+            <div class="cell">
+              <img src="/images/border_icon.png" class="icon" />
+            </div>
+          <% end %>
+          <div class="cell">
+            <img src="/images/wall_icon.png" class="icon" />
+          </div>
+        </div>
+
+        <% presenter.board_with_brick.each do |line| %>
+          <div class="line">
+            <div class="cell">
+              <img src="/images/border_icon.png" class="icon" />
+            </div>
+            <% line.each do |cell| %>
+              <% if cell == Game::EMPTY_BOARD_CELL %>
+                <div class="cell">
+                  <img src="/images/empty_icon.png" class="icon" />
+                </div>
+              <% elsif cell == Game::FULL_BOARD_CELL %>
+                <div class="cell">
+                  <img src="/images/wall_icon.png" class="icon" />
+                </div>
+              <% elsif cell == Game::BRICK_BOARD_CELL %>
+                <div class="cell">
+                  <img src="/images/brick_icon.png" class="icon" />
+                </div>
+              <% end %>
+            <% end %>
+            <div class="cell">
+              <img src="/images/border_icon.png" class="icon" />
+            </div>
+          </div>
+        <% end %>
+
+        <div class="line">
+          <div class="cell">
+            <img src="/images/brick_icon.png" class="icon" />
+          </div>
+          <% Game::BOARD_WIDTH.times do %>
+            <div class="cell">
+              <img src="/images/border_icon.png" class="icon" />
+            </div>
+          <% end %>
+          <div class="cell">
+            <img src="/images/brick_icon.png" class="icon" />
+          </div>
+        </div>
+      </td>
+      <td class="game-info">
+        <h3>
+          Score:
+        </h3>
+        <p>
+          <%= game.score %>
+        </p>
+
+        <% if game.next_brick %>
+          <div class="next-brick">
+            <h3>Next brick:</h3>
+            <% game.next_brick.body.each do |line| %>
+              <div class="line">
+                <% line.each do |cell| %>
+                  <% if cell == Brick::BLANK_CELL %>
+                    <div class="cell">
+                      <img src="/images/empty_icon.png" class="icon" />
+                    </div>
+                  <% elsif cell == Brick::FULL_CELL %>
+                    <div class="cell">
+                      <img src="/images/brick_icon.png" class="icon" />
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+
+          <% if game.running && game.tick < 50 %>
+            <h3>How to play:</h3>
+
+            Use keyboard arrows to move left/right or rotate
+          <% end %>
+        <% end %>
+
+        <% if game.question %>
+          <h3>Answer this:</h3>
+          <p>
+            <% if game.question_id.to_i < 1000 # dirty hack %>
+              <span style="padding-right: 6px;">In Ruby, what is</span>
+            <% end %>
+            <span style="font-family: Courier New;"><%= game.question.content %></strong>?
+          </p>
+
+          <div class="answers">
+            <% game.question.answers.each do |answer| %>
+              <%= form_with model: game, url: "/games/answer", local: false, class: 'answer' do |f| %>
+                <%= f.hidden_field :answer, value: answer %>
+                <%= f.submit answer %>
+              <% end %>
+            <% end %>
+          </div>
+
+          <br>
+          Hurry up! <%= Game::QUESTION_VISIBILITY_TIME - game.question_tick %>
+        <% end %>
+
+        <% if game.question_result %>
+          <h3>Your answer was:</h3>
+          <p>
+            <%= game.question_result %>
+          </p>
+        <% end %>
+
+        <% unless game.running %>
+          <h3>Great game!</h3>
+          <p>
+            Do you think you have a chance to win the prize?<br>
+            Add your email so we can contact you!
+          </p>
+
+          <%= form_with model: game, url: register_game_path(game) do |f| %>
+            <div>
+              <%= f.email_field :email, placeholder: 'Email', required: :required %>
+            </div>
+            <div>
+              <%= f.text_field :nickname, placeholder: 'Nickname', required: :required %>
+            </div>
+            <div>
+              <%= f.submit 'Send' %>
+            </div>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+</div>

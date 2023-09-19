@@ -1,0 +1,59 @@
+<div class="main-menu" id="main-menu" data-controller="root">
+  <a href="https://2023.euruko.org/" title="Euruko 2023" target="_blank">
+    <img src="/images/logo_euruko.png" width="600" style="max-width: 80%" />
+  </a><br />
+
+  <h1>Tetris on Rails</h1>
+  <br />
+  <img src="/images/tetris_banner.jpeg" width="200" style="max-width: 40%" />
+  <br><br>
+
+  <h3>How to play</h3>
+  <p class="how_to_win">
+    1. Enjoy the game.<br>
+    2. Use keyboard arrows to move left/right, hit up arrow to rotate bricks.<br>
+    3. If you clear more than 1 line at once, you will be asked a question. Answer it to boost your score.<br>
+  </p>
+
+  <div class="join-cta">
+    <% if @game %>
+      <%= link_to "Resume game", games_path, data: { turbo_method: "post" }, class: 'game-link' %>
+    <% else %>
+      <%= link_to "Start a new game", games_path, data: { turbo_method: "post" }, class: 'game-link' %>
+    <% end %>
+  </div>
+  <div class="mobile-join-cta">
+    <h3>Want to join?</h3>
+    <p>Sorry, desktop only. Please open this page in a desktop browser</p>
+  </div>
+
+  <h3>Current Leaderboard</h3>
+
+  <table class="top-scores">
+    <thead>
+      <tr>
+        <th>Place</th>
+        <th>Score</th>
+        <th>Player</th>
+        <th>Played At</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @top_score_games.each_with_index do |game, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= game.score %></td>
+        <td><%= game.nickname %></td>
+        <td><%= game.updated_at&.strftime('%Y-%m-%d %H:%M') %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="credits">
+  Written in Ruby on Rails |
+  Written by <a href="https://twitter.com/realPawelS" target="_blank">Paweł Strzałkowski</a> |
+  Powered by <a href="https://github.com/pstrzalk/rails_permanent_job" target="_blank">Rails Permanent Job</a> |
+  Delivered by <a href="https://www.visuality.pl/" target="_blank">Visuality</a>
+</div>

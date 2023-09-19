@@ -1,0 +1,216 @@
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: Syne, sans-serif;
+  letter-spacing: 0.06em;
+  padding-bottom: 100px;
+
+  a, a:visited {
+    text-decoration: none;
+    color: #99F;
+  }
+
+  .alert {
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+
+    &.alert-error {
+      color: #F00;
+    }
+
+    &.alert-notice {
+      color: #0F0;
+    }
+  }
+}
+
+.main-menu {
+  text-align: center;
+  max-width: 600px;
+  width: 75%;
+  margin: 0 auto;
+  padding: 50px 0;
+
+  .how_to_win {
+    margin: 0 auto 40px;
+    padding-left: 30px;
+    text-align: left;
+  }
+
+  .top-scores {
+    width: 500px;
+    margin: 0 auto;
+
+    td {
+      max-width: 130px;
+      padding-top: 4px;
+    }
+  }
+
+  h3.tickets-winners {
+    margin-top: 40px;
+  }
+  table.tickets-winners {
+    width: 300px;
+    margin: 0 auto;
+
+    td {
+      max-width: 130px;
+      padding-top: 4px;
+    }
+  }
+
+  a {
+    &.game-link {
+      display: inline-block;
+      padding: 30px 40px;
+      background-color: white;
+      color: black;
+      border: 2px solid black;
+      border-radius: 34px;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+      font-size: 150%;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.game-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.game {
+  width: 100%;
+  min-width: 860px;
+
+  .table {
+    width: 100%;
+
+    .game-col {
+      width: 600px;
+      text-align: center;
+    }
+
+    .game-info {
+      min-width: 120px;
+      // max-width: 400px;
+      vertical-align: top;
+
+      h3 {
+        margin-top: 50px;
+      }
+
+      .cell {
+        display: inline-block;
+        max-width: 25px;
+        max-height: 25px;
+
+        .icon {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .answers {
+        .answer {
+          width: 100%;
+
+          input[type="submit"] {
+            width: auto;
+            margin-bottom: 6px;
+            padding-left: 10px;
+            padding-right: 10px;
+
+            padding: 10px 10px;
+            background-color: white;
+            color: black;
+            border: 2px solid black;
+            border-radius: 34px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+          }
+        }
+      }
+
+      input {
+        font-size: 16px;
+        margin-bottom: 6px;
+      }
+
+      input[type="submit"] {
+        width: 90px;
+        padding: 10px 10px;
+        background-color: white;
+        color: black;
+        border: 2px solid black;
+        border-radius: 34px;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+      }
+
+      input[type="email"], input[type="text"] {
+        width: 200px;
+      }
+    }
+  }
+
+  .line {
+    width: 100%;
+
+    .cell {
+      display: inline-block;
+      max-width: 44px;
+      max-height: 44px;
+
+      .icon {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.credits {
+  background-color: #000;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 42px;
+  line-height: 32px;
+  text-align: center;
+}
+
+.main-menu {
+  .join-cta {
+    display: block;
+    margin-bottom: 40px;
+  }
+  .mobile-join-cta {
+    display: none;
+    margin-bottom: 40px;
+  }
+
+  &.mobile {
+    .join-cta {
+      display: none;
+    }
+    .mobile-join-cta {
+      display: block;
+    }
+  }
+}
